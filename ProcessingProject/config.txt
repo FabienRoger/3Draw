@@ -1,0 +1,24 @@
+version : 1
+camera name 1: Logitech HD Webcam C270
+angle cam 1: 51.5
+camera name 2: Logitech HD Webcam C310
+angle cam 2: 51.5
+smoothness (max = 50): 5
+pref color cam 1: -16730880
+pref color cam 2: -16742656
+camera height: 300.0
+unity save enable: 1
+led tracking enable: 1
+total save enable: 0
+cam led col: 1
+draw led col: -16775688
+cam option col: 1
+otpion led col: -4718592
+offset around axis X, cam 1: 0.0
+offset around axis X, cam 2: 0.0
+offset around axis Y, cam 1: 0.0
+offset around axis Y, cam 2: 0.0
+distance btw cam1 and cam 2: 300.0
+threshold color dist: 65
+minimum pixel number to detect: 1
+saved lines:   t83.3163;113.173004;14.128662;-15264950;4.568672,467.82587,-308.53735t2.0;2.0;2.0;-15264950;-29.409286,514.2673,-299.27774;-29.409286,514.2673,-262.03668t2.0;2.0;2.0;-15264950;42.063034,515.3662,-296.38092;42.063034,515.3662,-264.3466t2.0;2.0;2.0;-15264950;-27.33355,441.4093,-324.20166;-27.33355,441.4093,-252.7219
