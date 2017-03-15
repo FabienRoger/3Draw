@@ -66,6 +66,11 @@ void keyPressed(){
   if(key=='t'){
     saveSTL();
   }
+  if(key=='j'){
+    whichColChoose++;
+    if(whichColChoose>2)whichColChoose=0;
+    showVideo = true;
+  }
   if(key=='h'){
     showVideo = true;
     helpActive = !helpActive;

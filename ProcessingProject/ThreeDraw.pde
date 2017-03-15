@@ -16,6 +16,8 @@ color lineCol = color(255,255,0);
 color drawLedCol = -16761088;
 color optionLedCol = -4718592;
 
+int whichColChoose = 0;//0-->trackCol;1-->ledCol;2-->optionCol
+
 int camDrawLed;
 int camOptionLed;
 
@@ -63,6 +65,7 @@ PositionGenerator generator;
 ArrayList<String> sendList = new ArrayList<String>();
 
 void setup(){
+  frameRate(15);
   readConfig();
   size(1280,480,P3D);
   println(camName1+" "+camName2+" d =  "+d);
@@ -79,6 +82,10 @@ void setup(){
 }
 
 void captureEvent(Capture video){
+  /*if(video1.available()&&video2.available()){
+    video1.read();
+    video2.read();
+  }*/
   video.read();
 }
 
@@ -88,14 +95,31 @@ PVector getLastPoint(){
 
 void mousePressed(){
   if(showVideo){
-    
+    int col = 0;
+    int camChosen = 0;
     if(mouseButton == LEFT){
       int loc = (int)((mouseX-video1.pos.x) + (mouseY-video1.pos.y)*video1.width);
-       trackCol1 = video1.pixels[loc];
+      col = video1.pixels[loc];
+      camChosen=1;
     }else{
       int loc = (int)((mouseX-video2.pos.x) + (mouseY-video2.pos.y)*video2.width);
-      trackCol2 = video2.pixels[loc];
+      col = video2.pixels[loc];
+      camChosen=2;
     }
+    if(whichColChoose==0||!ledTrakingEnable){
+      if(camChosen==1){
+        trackCol1 = col;
+      }else{
+        trackCol2 = col;
+      }
+    }else if(whichColChoose==1){
+      camDrawLed=camChosen;
+      drawLedCol=col;
+    }else{
+      camOptionLed=camChosen;
+      optionLedCol=col;
+    }
+    
     println(trackCol1+" 1");
     println(trackCol2+" 2");
   }
@@ -117,7 +141,11 @@ void draw(){
   if(ledTrakingEnable){
     ledCheck();    
   }
-
+  /*
+  if(video1.available()&&video2.available()){
+    video1.read();
+    video2.read();
+  }*/
   
   PVector best1 = video1.getBestPixel(trackCol1);
   PVector best2 = video2.getBestPixel(trackCol2);
@@ -125,6 +153,9 @@ void draw(){
   if(showVideo){
     video1.showBest(best1);
     video2.showBest(best2);
+    fill(255);
+    if(ledTrakingEnable)
+      text(whichColChoose,0,50);
   }
   
   String[] pos = new String[1];

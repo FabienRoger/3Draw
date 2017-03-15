@@ -2,21 +2,20 @@ int minPix = 6;
 int threshold = 26;
   
 class SmartCamera extends Capture{
-  boolean fake;
-  
   PVector pos;
   
   //static public SmartCamera createCam(computer_vision_v3 cv,int resX, int resY, String camName,int frameRefreshRate,PVector pos){
   //  return new SmartCamera(cv,resX, resY,camName,frameRefreshRate,pos);
   //}
   
-  SmartCamera(ThreeDraw td,int resX, int resY, String camName,int frameRefreshRate,PVector pos){
+  SmartCamera(PApplet td,int resX, int resY, String camName,int frameRefreshRate,PVector pos){
     super(td,resX,resY,camName,frameRefreshRate);
     this.pos=pos;
     this.start();
     this.getBestPixel(0);
   }
   public PVector getBestPixel(int trackColor){
+    
     color trackCol = trackColor;
     int bX=-1;
     int bY=-1;
@@ -32,7 +31,7 @@ class SmartCamera extends Capture{
       for(int j = 0;j<this.height;j++){
         int loc = i+j*this.width;
         color actCol = this.pixels[loc];
-        float d = dist(red(actCol),green(actCol),blue(actCol),
+        float d = distSq(red(actCol),green(actCol),blue(actCol),
           red(trackCol),green(trackCol),blue(trackCol));
         /*
         if(d<record){
@@ -71,4 +70,8 @@ class SmartCamera extends Capture{
   }
   
   
+}
+
+float distSq(float x1,float y1,float z1,float x2,float y2,float z2){
+  return (x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)+(z1-z2)*(z1-z2);
 }

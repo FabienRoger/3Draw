@@ -14,6 +14,8 @@ PVector calcPoint(PVector best1, PVector best2){
    //x*=2;
    //x = map(x,0,300,-500,500);
    //z = map(z,-300,300,-300,300);
+   //println(best1+"   "+best2);
+   //println(x+" "+y+" "+z);
    return smooth(new PVector(x,y,z));
 }
 

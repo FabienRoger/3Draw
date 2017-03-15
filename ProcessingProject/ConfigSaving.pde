@@ -1,7 +1,7 @@
 
 int version = 1;
 
-String[] config = new String[24];
+String[] config = new String[23];
 
 void readConfig(){
   String tConfig[]=loadStrings("config.txt");
@@ -28,7 +28,9 @@ void readConfig(){
   d=float(tConfig[20].split(": ")[1]);
   threshold=int(tConfig[21].split(": ")[1]);
   minPix=int(tConfig[22].split(": ")[1]);
-  decompileSavedLines(tConfig[23].split(": ")[1]);
+  //decompileSavedLines(tConfig[23].split(": ")[1]);
+  String lines[] = loadStrings("lines.txt");
+  decompileSavedLines(lines[0]);
 }
 
 void saveConfig(){
@@ -53,10 +55,14 @@ void saveConfig(){
   config[18] = "offset around axis Y, cam 1: "+yRotDec1;
   config[19] = "offset around axis Y, cam 2: "+yRotDec2;
   config[20] = "distance btw cam1 and cam 2: "+d;
-  config[21] = "threshold color dist: "+threshold;
+  config[21] = "threshold color dist squared: "+threshold;
   config[22] = "minimum pixel number to detect: "+minPix;
-  config[23] = "saved lines: "+compileLines();
+  //config[23] = "saved lines: "+compileLines();
   saveStrings("config.txt",config);
+  
+  String lines[] = new String[1];
+  lines[0] = compileLines();
+  saveStrings("lines.txt",lines);
 }
 
 void decompileSavedLines(String c){
